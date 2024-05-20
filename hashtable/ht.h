@@ -2,19 +2,17 @@
 //  ht.h
 //  hashtable
 //
-//  Created by Andrey Marchenko on 05.05.24.
-//
 
 #ifndef ht_h
 #define ht_h
 
-#include <stdio.h>
+#include <stddef.h>
 #include <stdbool.h>
 
 typedef struct ht ht;
 
 // Create hash table and return pointer to it, or NULL if out of memory.
-ht* ht_create;
+ht* ht_create(void);
 
 // Free memory allocated for hash table, including allocated keys.
 void ht_destroy(ht* table);
