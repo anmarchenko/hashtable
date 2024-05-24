@@ -166,4 +166,29 @@ const char* ht_set(ht* table, const char* key, void* value) {
     return ht_set_entry(table->entries, table->capacity, key, value, &table->length);
 }
 
+size_t ht_length(ht* table) {
+    return table->length;
+}
 
+hti ht_iterator(ht* table) {
+    hti it;
+    it._table = table;
+    it._index = 0;
+    return it;
+}
+
+bool ht_next(hti* it) {
+    ht* table = it->_table;
+    while (it->_index < table->capacity) {
+        size_t i = it->_index;
+        it->_index++;
+        if (table->entries[i].key != NULL) {
+            // found non-empty entry!
+            ht_entry entry = table->entries[i];
+            it->key = entry.key;
+            it->value = entry.value;
+            return true;
+        }
+    }
+    return false;
+}
